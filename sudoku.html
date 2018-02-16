@@ -1,0 +1,515 @@
+<html>
+<head>
+<style>
+  .text-center { text-align: center; }
+</style>
+<script type="text/javascript">
+
+var c = [];
+
+//funções auxiliares julio
+function define_cont_fim_h(numero){
+
+  if(numero == 1 || numero == 2 || numero == 3){
+
+    return 3;
+
+  }
+
+  if(numero == 4 || numero == 5 || numero == 6){
+
+    return 6;
+
+  }
+
+  else{
+
+    return 9;
+
+  }
+}
+
+function define_cont_fim_v(numero){
+
+  if(numero == 1 || numero == 2 || numero == 3){
+
+    return 3;
+
+  }
+
+  if(numero == 4 || numero == 5 || numero == 6){
+
+    return 6;
+
+  }
+
+  else{
+
+    return 9;
+
+  }
+}
+
+function define_cont_inicio_v(numero){
+
+  if(numero == 1 || numero == 2 ||  numero == 3){
+
+    return 1;
+
+  }
+
+  if(numero == 4 || numero == 5 ||  numero == 6){
+
+    return 4;
+
+  }
+
+  else{
+
+    return 7;
+
+  }
+}
+
+function define_cont_inicio_h(numero){
+
+  if(numero == 1 || numero == 2 ||  numero == 3){
+
+    return 1;
+
+  }
+
+  if(numero == 4 || numero == 5 ||  numero == 6){
+
+    return 4;
+
+  }
+
+  else{
+
+    return 7;
+
+  }
+}
+
+function verifica_inicio_v(fim_quadrante){
+
+  if (fim_quadrante == 5 || fim_quadrante == 8 || fim_quadrante == 2) {
+    
+    return 2;
+
+  }
+
+  if (fim_quadrante == 1 || fim_quadrante == 4 || fim_quadrante == 7) {
+    
+    return 1;
+    
+  }
+
+  else{
+    
+    return 3;
+  
+  }
+}
+
+function verifica_horizontal(quadrante, fim_quadrante){
+
+  var arr = [];
+
+  //horizontal
+  if (quadrante == 2 || quadrante == 5 || quadrante == 8) {
+    
+    var help = parseInt(quadrante);
+
+    //ex: (8) => 9
+    var numero_3 = help+1;
+    //8
+    var numero_2 = help;
+    //7
+    var numero_1 = help-1;
+   
+  }
+
+  else if (quadrante == 3 || quadrante == 6 || quadrante == 9) {
+    
+    var help = parseInt(quadrante);
+
+    //ex: (8) => 9
+    var numero_3 = help;
+    //8
+    var numero_2 = help-1;
+    //7
+    var numero_1 = help-2;
+   
+  }
+
+  else{
+    
+    var help = parseInt(quadrante);
+
+    //ex: (1) => 3
+    var numero_3 = help+2;
+    //2
+    var numero_2 = help+1;
+    //1
+    var numero_1 = help;
+
+  }
+
+  var aux  = 0;
+  
+  var cont_inicio = define_cont_inicio_h(fim_quadrante); 
+  var cont_fim = define_cont_fim_h(fim_quadrante);
+
+  for (var i = 1; i < 10; i++) {
+    
+      if(i <= 3){  
+        numero2 = document.getElementById('n'+numero_1+''+cont_inicio).value;
+      }
+      
+      else if(i <= 6 && i >= 4){  
+        numero2 = document.getElementById('n'+numero_2+''+cont_inicio).value;
+      }
+
+      else{  
+        numero2 = document.getElementById('n'+numero_3+''+cont_inicio).value;
+      }
+
+    if (cont_inicio == cont_fim) {
+      cont_inicio = define_cont_inicio_h(fim_quadrante);
+    }else{
+      cont_inicio = cont_inicio+1;
+    }
+    
+    if (numero2 == '') { continue; }
+
+    //numero 2 é igual ao valor da horizontal;
+    arr.push(numero2);
+
+  } 
+
+  return arr;
+}
+
+function verifica_vertical(quadrante, fim_quadrante){
+
+  var arr = [];
+
+    var nro_inicial = verifica_inicio_v(quadrante);
+
+    //numero 97 -> quadrante = 9, fim_quad = 7
+    if (quadrante == 1 || quadrante == 2 || quadrante == 3) {
+      
+      var help = parseInt(quadrante);
+
+      //7
+      var numero_3 = help+6;
+      //4
+      var numero_2 = help+3;
+      //1
+      var numero_1 = help;
+      
+    }
+
+    else if (quadrante == 4 || quadrante == 5 || quadrante == 6) {
+      
+      var help = parseInt(quadrante);
+
+      //8
+      var numero_3 = help+3;
+      //5
+      var numero_2 = help;
+      //2
+      var numero_1 = help-3;
+     
+    }
+
+    else{
+      
+      var help = parseInt(quadrante);
+
+      //9
+      var numero_3 = help-6;
+      //6
+      var numero_2 = help-3;
+      //3
+      var numero_1 = help;
+
+    }
+
+    var aux  = 0;
+    
+    var cont_inicio = verifica_inicio_v(fim_quadrante);
+    parseInt(cont_inicio);
+
+    for (var i = 1; i < 10; i++) {
+      
+        if(i <= 3){  
+           numero2 = document.getElementById('n'+numero_1+''+cont_inicio).value;           
+        }
+        
+        else if(i <= 6 && i >= 4){ 
+          numero2 = document.getElementById('n'+numero_2+''+cont_inicio).value;
+        }
+
+        else{ 
+          numero2 = document.getElementById('n'+numero_3+''+cont_inicio).value;          
+        }
+
+      if (i == 3 || i == 6) {
+        cont_inicio = verifica_inicio_v(fim_quadrante);
+      }else{
+        cont_inicio = parseInt(cont_inicio)+3;
+      }
+      
+      if (numero2 == '') { continue; }
+
+      //numero 2 é igual ao valor da vertical;
+      arr.push(numero2);
+
+    } 
+
+    return arr; 
+}
+
+function limpa_array(array_a_ser_limpo, dados_a_limpar){
+
+  for (var i = 0; i < dados_a_limpar.length; i++) {
+    var index = array_a_ser_limpo.indexOf(parseInt(dados_a_limpar[i])); //Busca por valor
+    if (index !== -1) array_a_ser_limpo.splice(index, 1);
+  }
+
+  return array_a_ser_limpo;
+}
+
+function tira_itens_ja_inseridos(quadrante){
+
+  array_interno_quadrante = [1,2,3,4,5,6,7,8,9];
+
+  for (var i = 1; i < 10; i++) {
+    
+    var id_input = "n"+quadrante+''+i;
+    
+    if(document.getElementById(id_input).value != ''){
+
+      numero = document.getElementById(id_input).value;
+      var index = array_interno_quadrante.indexOf(parseInt(numero)); //Busca por valor
+      if (index !== -1) array_interno_quadrante.splice(index, 1);
+
+    }
+    
+  } 
+
+  return array_interno_quadrante;
+}
+
+function preenche_e_verifica(){
+
+  //TODO do while, enquanto nao tiver nenhum vazio ou 500(to test)
+  for (var w = 0; w < 15; w++) {
+    
+    for (var z = 1; z < 10; z++) {
+      
+      for (var y = 1; y < 10; y++) {
+        
+          var me_id = z+''+y;
+          //pega o id do campo com foco (97)
+          var id_elemento_com_foco = document.getElementById('n'+me_id).value;
+          
+          if (id_elemento_com_foco != '') {
+            
+            continue;
+          
+          }else{
+          
+          //ex(id == 97) => 9
+          var quadrante = me_id.substring(0, 1);
+          
+          // fim_quadrante => 7
+          var fim_quadrante = me_id.substring(1, 2);     
+          
+          //cria um array com numeros que nao foram preenchidos
+          var array_interno_quadrante = tira_itens_ja_inseridos(quadrante);
+
+          //os numeros que podem ser inseridos no quadrante
+          console.log(array_interno_quadrante); 
+
+          //horizontal
+          //mostra os numeros da horizontal e depois vai tirar eles dos numeros que podem ser inseridos no quadrante.
+          var array_horizontal = verifica_horizontal(quadrante, fim_quadrante);  
+          console.log("horizontal: "+array_horizontal);
+
+          //retira do array total os itens do array horizontal;
+          array_interno_quadrante = limpa_array(array_interno_quadrante, array_horizontal);
+          console.log(array_interno_quadrante); 
+
+          //vertical
+          //mostra os numeros da vertical e depois vai tirar eles dos numeros que podem ser inseridos no quadrante.
+
+          var array_vertical = verifica_vertical(quadrante, fim_quadrante);
+          console.log("vertical: "+array_vertical);
+
+          //retira do array total os itens do array VERTICAL;
+          array_interno_quadrante = limpa_array(array_interno_quadrante, array_vertical);
+          console.log(array_interno_quadrante);
+
+          //coloca o numero que não tem
+          if (array_interno_quadrante.length == 1) {
+            document.getElementById('n'+quadrante+''+fim_quadrante).value = array_interno_quadrante[0];  
+            //alert('n'+quadrante+''+fim_quadrante);          
+          }
+
+          array_interno_quadrante = [];
+          array_vertical = [];
+          array_horizontal = [];
+
+
+          }
+      
+      }
+    
+    }
+      
+  }
+
+}
+
+</script>
+
+</head>
+<body>
+<center>
+<br>
+
+<table border="1">
+<tr>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n11" id="n11" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n12" id="n12" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n13" id="n13" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n14" id="n14" class="text-center" value="2"></td>
+    <td><input type="text" size="1" name="n15" id="n15" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n16" id="n16" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n17" id="n17" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n18" id="n18" class="text-center" value="5"></td>
+    <td><input type="text" size="1" name="n19" id="n19" class="text-center" value=""></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n21" id="n21" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n22" id="n22" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n23" id="n23" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n24" id="n24" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n25" id="n25" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n26" id="n26" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n27" id="n27" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n28" id="n28" class="text-center" value="3"></td>
+    <td><input type="text" size="1" name="n29" id="n29" class="text-center" value=""></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n31" id="n31" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n32" id="n32" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n33" id="n33" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n34" id="n34" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n35" id="n35" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n36" id="n36" class="text-center" value="6"></td></tr>
+<tr><td><input type="text" size="1" name="n37" id="n37" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n38" id="n38" class="text-center" value="7"></td>
+    <td><input type="text" size="1" name="n39" id="n39" class="text-center" value=""></td></tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n41" id="n41" class="text-center" value="1"></td>
+    <td><input type="text" size="1" name="n42" id="n42" class="text-center" value="7"></td>
+    <td><input type="text" size="1" name="n43" id="n43" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n44" id="n44" class="text-center" value="5"></td>
+    <td><input type="text" size="1" name="n45" id="n45" class="text-center" value="3"></td>
+    <td><input type="text" size="1" name="n46" id="n46" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n47" id="n47" class="text-center" value="4"></td>
+    <td><input type="text" size="1" name="n48" id="n48" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n49" id="n49" class="text-center" value=""></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n51" id="n51" class="text-center" value="4"></td>
+    <td><input type="text" size="1" name="n52" id="n52" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n53" id="n53" class="text-center" value="3"></td></tr>
+<tr><td><input type="text" size="1" name="n54" id="n54" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n55" id="n55" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n56" id="n56" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n57" id="n57" class="text-center" value="5"></td>
+    <td><input type="text" size="1" name="n58" id="n58" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n59" id="n59" class="text-center" value="6"></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n61" id="n61" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n62" id="n62" class="text-center" value="6"></td>
+    <td><input type="text" size="1" name="n63" id="n63" class="text-center" value="5"></td></tr>
+<tr><td><input type="text" size="1" name="n64" id="n64" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n65" id="n65" class="text-center" value="4"></td>
+    <td><input type="text" size="1" name="n66" id="n66" class="text-center" value="7"></td></tr>
+<tr><td><input type="text" size="1" name="n67" id="n67" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n68" id="n68" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n69" id="n69" class="text-center" value="9"></td></tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n71" id="n71" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n72" id="n72" class="text-center" value="9"></td>
+    <td><input type="text" size="1" name="n73" id="n73" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n74" id="n74" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n75" id="n75" class="text-center" value="4"></td>
+    <td><input type="text" size="1" name="n76" id="n76" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n77" id="n77" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n78" id="n78" class="text-center" value="8"></td>
+    <td><input type="text" size="1" name="n79" id="n79" class="text-center" value=""></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n81" id="n81" class="text-center" value="7"></td>
+    <td><input type="text" size="1" name="n82" id="n82" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n83" id="n83" class="text-center" value="1"></td></tr>
+<tr><td><input type="text" size="1" name="n84" id="n84" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n85" id="n85" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n86" id="n86" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n87" id="n87" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n88" id="n88" class="text-center" value="4"></td>
+    <td><input type="text" size="1" name="n89" id="n89" class="text-center" value=""></td></tr>
+</table>
+</td>
+<td>
+<table border="0">
+<tr><td><input type="text" size="1" name="n91" id="n91" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n92" id="n92" class="text-center" value="2"></td>
+    <td><input type="text" size="1" name="n93" id="n93" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n94" id="n94" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n95" id="n95" class="text-center" value="5"></td>
+    <td><input type="text" size="1" name="n96" id="n96" class="text-center" value=""></td></tr>
+<tr><td><input type="text" size="1" name="n97" id="n97" class="text-center" value=""></td>
+    <td><input type="text" size="1" name="n98" id="n98" class="text-center" value="3"></td>
+    <td><input type="text" size="1" name="n99" id="n99" class="text-center" value=""></td></tr>
+</table>
+</td>
+</tr>
+</table>
+<br>
+<button type="button" onclick="preenche_e_verifica()">Resolver</button>
+
+</center>
+</body>
+</html>
